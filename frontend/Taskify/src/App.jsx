@@ -15,30 +15,31 @@ import PrivateRoute from "./routes/PrivateRoute";
 
 const App = () => {
   return (
-    <Routes>
-      {/* Default route */}
-      <Route path="/" element={<div>Home Page</div>} />
+    <>
+      <Routes>
+        {/* Default route */}
+        <Route path="/" element={<div>Home Page</div>} />
 
-      {/* Login page route */}
-      <Route path="/login" element={<Login />} />
-      <Route path="/signup" element={<SignUp />} />
+        {/* Login page route */}
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<SignUp />} />
 
-      {/* Admin Routes */}
-      <Route element={<PrivateRoute allowedRoles={["admin"]} />}>
-        <Route path="/admin/dashboard" element={<DashBoard />} />
-        <Route path="/admin/tasks" element={<ManageTasks />} />
-        <Route path="/admin/create-task" element={<CreateTask />} />
-        <Route path="/admin/users" element={<ManageUsers />} />
-      </Route>
+        {/* Admin Routes */}
+        <Route element={<PrivateRoute allowedRoles={["admin"]} />}>
+          <Route path="/admin/dashboard" element={<DashBoard />} />
+          <Route path="/admin/tasks" element={<ManageTasks />} />
+          <Route path="/admin/create-task" element={<CreateTask />} />
+          <Route path="/admin/users" element={<ManageUsers />} />
+        </Route>
 
-      {/* User Routes */}
-      <Route element={<PrivateRoute allowedRoles={["user"]} />}>
-        <Route path="/user/dashboard" element={<UserDashBoard />} />
-        <Route path="/user/tasks" element={<MyTasks />} />
-        <Route path="/user/task-details/:id" element={<VeiwTaskDetails />} />
-      </Route>
-
-    </Routes>
+        {/* User Routes */}
+        <Route element={<PrivateRoute allowedRoles={["user"]} />}>
+          <Route path="/user/dashboard" element={<UserDashBoard />} />
+          <Route path="/user/tasks" element={<MyTasks />} />
+          <Route path="/user/task-details/:id" element={<VeiwTaskDetails />} />
+        </Route>
+      </Routes>
+    </>
   );
 };
 
