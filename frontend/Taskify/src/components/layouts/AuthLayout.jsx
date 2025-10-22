@@ -1,8 +1,18 @@
 import React from 'react'
+import UI_IMG from '../../assets/UI_IMG.png'
 
-const AuthLayout = () => {
+const AuthLayout = ({ children }) => {
   return (
-    <div>AuthLayout</div>
+    <div className='flex'>
+      <div className='w-screen h-screen md:w-[60vw] px-12 pt-8 pb-12'>
+        <h2 className='text-lg font-medium text-black'>Taskify</h2>
+        {children}
+      </div>
+
+      <div className='hidden md:flex w-[60vw] h-screen justify-end items-center bg-cover bg-no-repeat bg-center overflow-hidden p-0'>
+        <img src={UI_IMG} alt="UI Illustration" className='h-screen w-64 lg:w-[90%] '/>
+      </div>
+    </div>
   )
 }
 
