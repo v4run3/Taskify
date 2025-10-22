@@ -1,3 +1,4 @@
+// AuthLayout.jsx
 import React from 'react'
 import UI_IMG from '../../assets/UI_IMG.png'
 
