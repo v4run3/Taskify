@@ -61,6 +61,28 @@ const registerUser = async (req, res) => {
 //@access Public
 const loginUser = async (req, res) => {
     try { 
+      const { email, password } = req.body;
+      
+      const user = await User.findOne({ email });
+      if ( !user) {
+          return res.status(401).json({ message: 'Invalid credentials' });
+      }
+        
+      // Compare password
+      const isMatch = await bcrypt.compare(password, user.password);
+        if (!isMatch) {
+            return res.status(401).json({ message: 'Invalid credentials' });
+        }
+
+        //return user data with JWT
+        res.status(200).json({
+            _id: user._id,
+            name: user.name,
+            email: user.email,
+            role: user.role,
+            profileImageUrl: user.profileImageUrl,
+            token: generateToken(user._id),
+        });
     } catch (error) {
         res.status(500).json({ message: 'Server error', error: error.message });
     }
@@ -69,7 +91,12 @@ const loginUser = async (req, res) => {
 //@route GET /api/auth/profile
 //@access Private
 const getUserProfile = async (req, res) => {
-    try { 
+    try {
+      const user = await User.findById(req.user.id).select('-password');
+      if (!user) {
+          return res.status(404).json({ message: 'User not found' });
+      }
+      res.json(user);   
     } catch (error) {
         res.status(500).json({ message: 'Server error', error: error.message });
     }
