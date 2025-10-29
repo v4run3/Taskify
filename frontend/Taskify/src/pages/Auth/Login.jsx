@@ -14,6 +14,20 @@ const Login = () => {
   // Handle login form submission
   const handleLogin = async (e) => {
     e.preventDefault();
+
+    if (!validateEmail(email)) {
+      setError("Please enter a valid email address.");
+      return;
+    }
+    
+    if (!password) {
+      setError("Please enter your password.");
+      return;
+    }
+
+    setError("");
+    
+    //login API call
   };
 
   return (
