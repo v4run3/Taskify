@@ -3,6 +3,7 @@ import React from "react";
 import AuthLayout from "../../components/layouts/AuthLayout";
 import Input from "../../components/Input/Input";
 import { Link, useNavigate } from "react-router-dom";
+import axiosInstance from "../../utils/axiosInstance";
 
 const Login = () => {
   const [email, setEmail] = React.useState("");
