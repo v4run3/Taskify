@@ -1,6 +1,9 @@
-import React, { use } from 'react'
+import React, { useState } from 'react'
 import AuthLayout from '../../components/layouts/AuthLayout'
 import { Link } from 'react-router-dom';
+import {validateEmail} from "../../utils/helper";
+import ProfilePhotoSelector from '../../components/Input/ProfilePhotoSelector';
+import Input from '../../components/Input/Input';
 
 const SignUp = () => {
   const [profilePic,setProfilePic] =useState(null);

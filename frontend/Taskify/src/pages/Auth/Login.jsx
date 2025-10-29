@@ -28,6 +28,11 @@ const Login = () => {
     setError("");
     
     //login API call
+    try {
+
+    } catch (error) {
+    
+    }
   };
 
   return (
