@@ -24,9 +24,9 @@ const ProfilePhotoSelector = ({ image, setImage }) => {
     <input
         type="file"
         accept='image/*'
-        ref={imputRef}
+        ref={inputRef}
         onChange={handleImageChange}
-        className=""
+        className="hidden"
     />
     {image ? (
         <div className="w-20 h-20 flex items-center justify-center bg-blue-100/50 rounded-full relative cursor-pointer">
