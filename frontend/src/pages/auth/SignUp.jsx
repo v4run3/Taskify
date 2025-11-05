@@ -20,6 +20,23 @@ const SignUp = () => {
   const [adminInviteToken, setAdminInviteToken] = useState("")
   const [showAdminInviteToken, setShowAdminInviteToken] = useState(false)
 
+  // ✅ Helper: build signup payload dynamically
+  const buildSignupData = async (profileImageUrl) => {
+    const data = {
+      name: fullName,
+      email,
+      password,
+      profileImageUrl,
+    }
+
+    // only send adminJoinCode if user entered something
+    if (adminInviteToken && adminInviteToken.trim() !== "") {
+      data.adminJoinCode = adminInviteToken
+    }
+
+    return data
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault()
 
@@ -42,7 +59,6 @@ const SignUp = () => {
 
     setError(null)
 
-    // SignUp API call
     try {
       // Upload profile picture if present
       if (profilePic) {
@@ -50,13 +66,10 @@ const SignUp = () => {
         profileImageUrl = imageUploadRes.imageUrl || ""
       }
 
-      const response = await axiosInstance.post("/auth/sign-up", {
-        name: fullName,
-        email,
-        password,
-        profileImageUrl,
-        adminJoinCode: adminInviteToken,
-      })
+      // ✅ Build final payload dynamically
+      const signupData = await buildSignupData(profileImageUrl)
+
+      const response = await axiosInstance.post("/auth/sign-up", signupData)
 
       if (response.data) {
         navigate("/login")
@@ -95,7 +108,7 @@ const SignUp = () => {
               </p>
             </div>
 
-            {/* Login Form */}
+            {/* Signup Form */}
             <form onSubmit={handleSubmit} className="space-y-6">
               <ProfilePhotoSelector
                 image={profilePic}
@@ -104,7 +117,7 @@ const SignUp = () => {
 
               <div>
                 <label
-                  htmlFor="email"
+                  htmlFor="fullName"
                   className="block text-sm font-medium text-gray-700 mb-1"
                 >
                   Full Name
@@ -169,20 +182,20 @@ const SignUp = () => {
                 </div>
               </div>
 
+              {/* ✅ Admin Token - Optional */}
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Admin Invite Token
+                  Admin Invite Token (Optional)
                 </label>
 
                 <div className="relative">
                   <input
-                    id="adminInviteTokem"
+                    id="adminInviteToken"
                     type={showAdminInviteToken ? "text" : "password"}
                     value={adminInviteToken}
                     onChange={(e) => setAdminInviteToken(e.target.value)}
                     className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent pr-12"
-                    placeholder="•••••••"
-                    required
+                    placeholder="Leave blank if not admin"
                   />
 
                   <button
@@ -211,7 +224,7 @@ const SignUp = () => {
 
             <div className="mt-6 text-center text-sm">
               <p className="text-gray-600">
-                Already have an accout?{" "}
+                Already have an account?{" "}
                 <Link
                   to={"/login"}
                   className="font-medium text-blue-600 hover:text-blue-500"
