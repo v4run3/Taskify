@@ -1,0 +1,8 @@
+FRONT_END_URL="http://localhost:5173"
+
+MONGO_URI="mongodb+srv://shivamchoughule1_db_user:E5YlIwYHGIPBVgUM@cluster0.f1grbz9.mongodb.net/?appName=Cluster0"
+
+ADMIN_JOIN_CODE=123456
+
+JWT_SECRET=abcdefghijklm1234567890
+
