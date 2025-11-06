@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: taskify-deployment
+  labels:
+    app: taskify
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: taskify
+  template:
+    metadata:
+      labels:
+        app: taskify
+    spec:
+      containers:
+        - name: taskify-container
+          image: taskify-app:latest     # uses your local image from Docker Desktop
+          imagePullPolicy: IfNotPresent # prevents trying to pull from Docker Hub
+          ports:
+            - containerPort: 5000
+          env:
+            - name: NODE_ENV
+              value: "production"
+            - name: PORT
+              value: "5000"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: taskify-service
+spec:
+  selector:
+    app: taskify
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 5000
+  type: LoadBalancer
