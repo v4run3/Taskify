@@ -95,8 +95,8 @@ const Login = () => {
             </div>
 
             <p className="text-lg opacity-95 max-w-lg leading-relaxed">
-              Login to your <strong>Project Flow</strong> dashboard and manage
-              your work efficiently with intelligent automation and seamless
+              Login to <strong>Taskify</strong> dashboard and manage
+              your Tasks efficiently with intelligent automation and seamless
               team collaboration.
             </p>
           </div>

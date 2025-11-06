@@ -70,9 +70,9 @@ const SignUp = () => {
               </svg>
             </div>
 
-            <h1 className="text-2xl font-bold mt-4">JOIN PROJECT FLOW</h1>
+            <h1 className="text-2xl font-bold mt-4">JOIN TASKIFY NOW</h1>
             <p className="text-sm text-gray-500 mt-2">
-              Start managing your projects efficiently
+              Start managing your tasks efficiently
             </p>
 
             <div className="mt-6 flex justify-center">
