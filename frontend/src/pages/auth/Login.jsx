@@ -1,11 +1,11 @@
 import React, { useState } from "react"
-import AuthLayout from "../../components/AuthLayout"
-import { FaEyeSlash, FaPeopleGroup } from "react-icons/fa6"
-import { FaEye } from "react-icons/fa"
 import { Link, useNavigate } from "react-router-dom"
+import { AiOutlineMail } from "react-icons/ai"
+import { FaEye, FaEyeSlash } from "react-icons/fa"
+import { useDispatch, useSelector } from "react-redux"
+import AuthLayout from "../../components/AuthLayout"
 import { validateEmail } from "../../utils/helper"
 import axiosInstance from "../../utils/axioInstance"
-import { useDispatch, useSelector } from "react-redux"
 import {
   signInFailure,
   signInStart,
@@ -15,12 +15,10 @@ import {
 const Login = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
-
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
-  const [showPassword, setShowPassword] = useState(false)
+  const [showPass, setShowPass] = useState(false)
   const [error, setError] = useState(null)
-
   const { loading } = useSelector((state) => state.user)
 
   const handleSubmit = async (e) => {
@@ -38,22 +36,13 @@ const Login = () => {
 
     setError(null)
 
-    // Login API call
     try {
       dispatch(signInStart())
-
       const response = await axiosInstance.post(
         "/auth/sign-in",
-        {
-          email,
-          password,
-        },
-        {
-          withCredentials: true,
-        }
+        { email, password },
+        { withCredentials: true }
       )
-
-      // console.log(response.data)
 
       if (response.data.role === "admin") {
         dispatch(signInSuccess(response.data))
@@ -75,108 +64,117 @@ const Login = () => {
 
   return (
     <AuthLayout>
-      <div className="w-full max-w-md">
-        <div className="bg-white rounded-xl shadow-2xl overflow-hidden">
-          {/* Gradient top border */}
-          <div className="h-2 bg-gradient-to-r from-blue-600 to-blue-400"></div>
-
-          <div className="p-8">
-            {/* Logo and title */}
-            <div className="text-center mb-8">
-              <div className="flex justify-center">
-                <div className="bg-blue-100 p-3 rounded-full">
-                  <FaPeopleGroup className="text-4xl text-blue-600" />
-                </div>
+      <div className="flex items-center justify-center w-full">
+        {/* Key change: explicit card max width to increase breadth */}
+        <div className="bg-white rounded-3xl shadow-2xl overflow-hidden w-full max-w-[1100px] flex flex-col md:flex-row">
+          {/* LEFT BLUE PANEL - hidden on small screens */}
+          <div
+            className="hidden md:flex flex-col justify-center items-start p-16 text-white w-[56%]"
+            style={{
+              background:
+                "linear-gradient(135deg, #0a4bd6 0%, #0f66f6 50%, #0b4a8b 100%)",
+            }}
+          >
+            <div className="flex items-center mb-8">
+              <div className="rounded-full bg-yellow-400 w-12 h-12 flex items-center justify-center mr-5 shadow-md">
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M3 7l3 10h12l3-10-4 3-4-6-4 6-4-3z"
+                    fill="#fff"
+                    opacity="0.9"
+                  />
+                </svg>
               </div>
+              <h1 className="text-4xl font-extrabold tracking-wide">WELCOME</h1>
+            </div>
 
-              <h1 className="text-2xl font-bold text-gray-800 mt-4 uppercase">
-                Project Flow
-              </h1>
+            <p className="text-lg opacity-95 max-w-lg leading-relaxed">
+              Login to your <strong>Project Flow</strong> dashboard and manage
+              your work efficiently with intelligent automation and seamless
+              team collaboration.
+            </p>
+          </div>
 
-              <p className="text-gray-600 mt-1">
-                Manage your projects efficiently
+          {/* RIGHT FORM PANEL */}
+          <div className="w-full md:w-[44%] bg-white p-10 md:p-16 flex flex-col justify-center">
+            <div className="text-center mb-6">
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-1">
+                Sign In
+              </h2>
+              <p className="text-sm text-gray-500">
+                Enter your credentials to access your account
               </p>
             </div>
 
-            {/* Login Form */}
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
-                <label
-                  htmlFor="email"
-                  className="block text-sm font-medium text-gray-700 mb-1"
-                >
-                  Email Address
-                </label>
-
-                <input
-                  id="email"
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                  placeholder="your@email.com"
-                  required
-                />
+                <label className="text-sm text-gray-700">Email Address</label>
+                <div className="mt-2 relative">
+                  <input
+                    type="email"
+                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    placeholder="you@example.com"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
+                  <AiOutlineMail className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400" />
+                </div>
               </div>
 
               <div>
-                <label
-                  htmlFor="password"
-                  className="block text-sm font-medium text-gray-700 mb-1"
-                >
-                  Password
-                </label>
-
-                <div className="relative">
+                <label className="text-sm text-gray-700">Password</label>
+                <div className="mt-2 relative">
                   <input
-                    id="password"
-                    type={showPassword ? "text" : "password"}
+                    type={showPass ? "text" : "password"}
+                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent pr-12"
+                    placeholder="••••••••"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent pr-12"
-                    placeholder="•••••••"
-                    required
                   />
-
                   <button
                     type="button"
-                    className="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-500 hover:text-gray-700"
-                    onClick={() => setShowPassword(!showPassword)}
+                    onClick={() => setShowPass(!showPass)}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-600 text-sm"
                   >
-                    {showPassword ? <FaEyeSlash /> : <FaEye />}
+                    {showPass ? <FaEyeSlash /> : <FaEye />}
                   </button>
                 </div>
               </div>
 
-              {error && <p className="text-red-500 text-sm">{error}</p>}
+              {error && (
+                <p className="text-red-500 text-sm text-center">{error}</p>
+              )}
 
               {loading ? (
-                <span className="animate-pulse w-full text-center bg-blue-600 text-white">
+                <div className="w-full text-center bg-blue-600 text-white py-3 rounded-lg animate-pulse">
                   Loading...
-                </span>
-              ) : (
-                <div>
-                  <button
-                    type="submit"
-                    className="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-0 focus:ring-offset-0 cursor-pointer"
-                  >
-                    LOGIN
-                  </button>
                 </div>
-              )}
-            </form>
-
-            <div className="mt-6 text-center text-sm">
-              <p className="text-gray-600">
-                Don't have an accout?{" "}
-                <Link
-                  to={"/signup"}
-                  className="font-medium text-blue-600 hover:text-blue-500"
+              ) : (
+                <button
+                  type="submit"
+                  className="w-full mt-2 py-3 rounded-lg text-white font-semibold transition-all duration-200 hover:opacity-90"
+                  style={{
+                    background: "linear-gradient(90deg,#0f66f6,#0a4bd6)",
+                    boxShadow: "0 8px 18px rgba(11,76,255,0.25)",
+                  }}
                 >
-                  Sign up
+                  Sign In
+                </button>
+              )}
+
+              <p className="text-center text-sm text-gray-500 mt-3">
+                Don’t have an account?{" "}
+                <Link to="/signup" className="font-medium text-blue-600 underline">
+                  Sign Up
                 </Link>
               </p>
-            </div>
+            </form>
           </div>
         </div>
       </div>
