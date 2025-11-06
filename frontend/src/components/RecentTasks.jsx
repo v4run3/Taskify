@@ -10,12 +10,12 @@ const RecentTasks = ({ tasks }) => {
       <div className="p-6 border-b border-gray-200 flex justify-between items-center">
         <h3 className="text-lg font-semibold text-gray-800">Recent Tasks</h3>
 
-        <button
+        {/* <button
           onClick={() => navigate("/admin/tasks")}
           className="text-blue-600 hover:text-blue-800 text-sm font-medium transition-colors p-2 bg-blue-50 hover:bg-blue-100"
         >
           See More →
-        </button>
+        </button> */}
       </div>
 
       <div className="p-6">
