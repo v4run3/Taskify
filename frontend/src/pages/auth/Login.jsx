@@ -94,7 +94,6 @@ const Login = () => {
               <h1 className="text-4xl font-extrabold tracking-wide">WELCOME</h1>
             </div>
 
-<<<<<<< HEAD
             <p className="text-lg opacity-95 max-w-lg leading-relaxed">
               Login to your <strong>Project Flow</strong> dashboard and manage
               your work efficiently with intelligent automation and seamless
@@ -110,14 +109,6 @@ const Login = () => {
               </h2>
               <p className="text-sm text-gray-500">
                 Enter your credentials to access your account
-=======
-              <h1 className="text-2xl font-bold text-gray-800 mt-4 uppercase">
-                Taskify - Login
-              </h1>
-
-              <p className="text-gray-600 mt-1">
-                Manage your tasks efficiently
->>>>>>> 485d926fcf2037f71a525b0f24db10634908236a
               </p>
             </div>
 
