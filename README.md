@@ -131,7 +131,32 @@ kubectl apply -f frontend-deployment.yaml
 
 ---
 ## Screenshots
+Sign-In Page
+<img width="1918" height="991" alt="image" src="https://github.com/user-attachments/assets/5ca9f493-2239-4b29-9956-d501d4829491" />
 
+Sign-up Page
+<img width="1917" height="994" alt="image" src="https://github.com/user-attachments/assets/b794ad38-29d8-4ce5-9f09-df79347f910b" />
+
+Admin Dashboard
+<img width="1916" height="980" alt="image" src="https://github.com/user-attachments/assets/44a203b9-6066-4d75-aa0d-d481b83c2044" />
+
+Recent Tasks & Task Categorization
+<img width="940" height="592" alt="image" src="https://github.com/user-attachments/assets/57214b17-cbba-4aed-b8a8-b1e303d2be9e" />
+
+Admin Manage Task and Create Task
+<img width="940" height="479" alt="image" src="https://github.com/user-attachments/assets/1e3bbb6a-db93-4b14-8446-52881b0226cf" />
+<img width="933" height="480" alt="image" src="https://github.com/user-attachments/assets/9a8f522a-ca1d-4e39-b280-7c9e761c83f5" />
+
+Task Assigned to Members
+<img width="940" height="356" alt="image" src="https://github.com/user-attachments/assets/28f04bb7-84a6-46eb-807c-9dd65c17b120" />
+
+User Dashboard
+<img width="930" height="468" alt="image" src="https://github.com/user-attachments/assets/07b16424-05e8-4c45-9c67-ef9108c4e696" />
+
+User Assigned Tasks
+<img width="940" height="349" alt="image" src="https://github.com/user-attachments/assets/ee2f7b90-8137-4530-b91f-0e6a55ab12c8" />
+
+---
 
 ## 🧠 Contributotrs
 **Shivam Choughule & Varun Bhonslay** 
